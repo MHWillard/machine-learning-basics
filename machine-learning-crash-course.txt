@@ -1,0 +1,9 @@
+These are my notes for Google's Machine Learning Crash Course.
+
+==FRAMING==
+Labels typically expressed by variable y
+Features represented by x1, x2, ...xn
+
+Labeled example is this: {features, label} (x,y)
+Unlabeled: {features, ?} (x, ?)
+Model mapes examples to predicted labels: y'

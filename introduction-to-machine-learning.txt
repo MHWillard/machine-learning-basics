@@ -1,0 +1,64 @@
+These are my notes for Google's Introduction to Machine Learning course.
+
+==WHAT IS MACHINE LEARNING?==
+- training a piece of software (model) to make predictions from data
+- the model =  mathematical relationship between the elements of data that an ML system uses to make predictions
+
+for rain:
+1. give ML model lots of weather data
+2. train model to understand weather patterns that produce rain
+3. give model current data => it predicts rain amount
+
+Three Types of ML Systems:
+- Supervised learning
+- Unsupervised learning
+- Reinforcement learning
+
+SUPERVISED:
+- model sees lots of data with correct answers => discovers connections that make correct answers (like studying old tests for taking a new one)
+=> USE CASES:
+Regression: predict numeric value
+Classification: likelihood of something belonging to category (is this email spam? Is this photo a cat?)
+
+UNSUPERVISED:
+Data with no correct answers: model has to find patterns
+- one technique is clustering where it pairs data that seem to match in certain ways
+
+REINFORCEMENT:
+Uses predictions to get the most rewards based on a policy and to avoid penalties
+- used to train tasks like play Go
+
+==SUPERVISED LEARNING==
+Core Concepts:
+- Data
+- Model
+- Training
+- Evaluating
+- Inference
+
+DATA
+Datasets have features and a label in each example like a spreadsheet row
+Model uses features to predict the label (the answer)
+
+Datasets have size (number of examples) and diversity (range the examples cover)
+- You typically want large, highly diverse datasets for accurate predictions
+- More features are also nice but =/= most accurate predictions
+
+MODEL
+complex collection of numbers that define the mathematical relationship from specific input feature patterns to specific output label values
+
+TRAINING
+- this is how a model finds patterns
+1. model predicts a value
+2. model compares prediction to actual value
+3. model notes difference and modifies solution
+4. repeats for each example to learn relationships
+
+Large/diverse datasets are best for this
+- You can also select which features the model uses during training to test how it makes predictions
+
+EVALUATING
+Compare the predicted values of the model with the actual values to see how it learned, and do more training/eval passes as needed
+
+INFERENCE
+Once results are good, use the model to infer predictions on unlabelled examples
