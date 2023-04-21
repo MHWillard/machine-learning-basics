@@ -5,5 +5,47 @@ Labels typically expressed by variable y
 Features represented by x1, x2, ...xn
 
 Labeled example is this: {features, label} (x,y)
-Unlabeled: {features, ?} (x, ?)
-Model mapes examples to predicted labels: y'
+Unlabeled example: {features, ?} (x, ?)
+Model maps examples to predicted labels: y'
+
+Train on labeled => use on unlabeled (inference)
+
+Regression: predict numeric value
+
+Classification: likelihood of something belonging to category (is this email spam? Is this photo a cat?)
+
+
+==DESCENDING INTO ML==
+Here's how to explore a data relationship and start to predict it:
+
+1. Plot the data
+2. Approximate the relationship, such as drawing a line. (This means it's a linear relationship.) This is summed up as a formula:
+	y' = b + w_1 + x_1
+	y = predicted label
+	b = bias (y-intercept)
+	w_1 = weight of feature 1 (IE, a slope)
+	x_1 = feature (known output)
+Insert a new x_1 => infer a new y' temp
+
+TRAINING: the model learns good values for weights and bias from learned examples. Basically, the ML algo wants to build a model that minimizes loss (a penalty). This is called empirical risk minimization.
+
+Loss = 0 if the prediction was dead on, otherwise it's less. The model wants to find a set of weight and biases with low loss, on average, across all examples. Supervisied training helps with this.
+
+Squared loss function for linear regression:
+(y - y')^2
+
+Mean Square Error:
+Sigma(y - y')^2/n
+
+y is the ith observed value.
+y' is the corresponding predicted value.
+n = the number of observations.
+
+
+==REDUCING LOSS==
+With iterative learning, a model's updated with training to reduce loss by recalculating with each guess and getting 'warmer' to the best possible model. It takes one or more features and returns a prediction as output.
+Formula is: y'=b + w_1 + x_1
+Once it gets an output for a feature (w_1), it then runs a loss function for the model (see: squared loss function above).
+Then, the model examines the loss value function, generates new values for b and w_1, then runs it again, over and over, until loss stops changing or changes extremely slowly.
+
+One popular way of recalculating these paramenters is to apply the gradient descend mechanism. IN SUMMARY, it calculates the gradient of the loss curve towards the minimum. This is how it recalculates and picks new parameters to test.
