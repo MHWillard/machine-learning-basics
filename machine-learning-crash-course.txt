@@ -48,4 +48,12 @@ Formula is: y'=b + w_1 + x_1
 Once it gets an output for a feature (w_1), it then runs a loss function for the model (see: squared loss function above).
 Then, the model examines the loss value function, generates new values for b and w_1, then runs it again, over and over, until loss stops changing or changes extremely slowly.
 
-One popular way of recalculating these paramenters is to apply the gradient descend mechanism. IN SUMMARY, it calculates the gradient of the loss curve towards the minimum. This is how it recalculates and picks new parameters to test.
+One popular way of recalculating these paramenters is to apply the gradient descend mechanism. IN SUMMARY, it calculates the gradient of the loss curve towards the minimum. This is how it recalculates and picks new parameters to test. in ML algos, programmers tweak hyperparameters that tune the learning rate of the algo. Not too small, not too large.
+
+BATCH: total number of examples used to calculate gradient in single iteration
+STOCHASTIC GRADIENT DESCENT: batch size is 1 per iteration
+MINI-BATCH STOCHASTIC GRADIENT DESCENT: typically between 10-1000 random examples
+
+
+==FIRST STEPS WITH TENSORFLOW==
+TensorFlow APIs have high-level APIs built on low-level APIs - the low-levels are used to make new ML algos
