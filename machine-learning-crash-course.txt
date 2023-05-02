@@ -57,3 +57,5 @@ MINI-BATCH STOCHASTIC GRADIENT DESCENT: typically between 10-1000 random example
 
 ==FIRST STEPS WITH TENSORFLOW==
 TensorFlow APIs have high-level APIs built on low-level APIs - the low-levels are used to make new ML algos
+
+=> Simple Linear Regression with Synthetic Data
