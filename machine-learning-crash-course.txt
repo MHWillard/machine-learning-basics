@@ -59,3 +59,10 @@ MINI-BATCH STOCHASTIC GRADIENT DESCENT: typically between 10-1000 random example
 TensorFlow APIs have high-level APIs built on low-level APIs - the low-levels are used to make new ML algos
 
 => Simple Linear Regression with Synthetic Data
+RULES OF THUMB FOR TUNING HYPERPARAMETERS:
+- Training loss decrease should be steady. Sharp drop at first, then slowly, until curve reaches or approaches zero.
+- No converge? Train for more epochs.
+- Loss decrease too slowly? Try upping the learning rate. (Not too high, that might prevent convergence.)
+- Loss varying wildly? Decrease learning rate.
+- A good combo: lower learning rate, increase epochs or batch size.
+- Try large batch sizes, then tune it down.
