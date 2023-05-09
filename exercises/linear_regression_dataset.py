@@ -83,7 +83,22 @@ def plot_the_loss_curve(epochs, rmse):
   plt.plot(epochs, rmse, label="Loss")
   plt.legend()
   plt.ylim([rmse.min()*0.97, rmse.max()])
-  plt.show()  
+  plt.show() 
+
+def predict_house_values(n, feature, label):
+  """Predict house values based on a feature."""
+
+  batch = training_df[feature][10000:10000 + n]
+  predicted_values = my_model.predict_on_batch(x=batch)
+
+  print("feature   label          predicted")
+  print("  value   value          value")
+  print("          in thousand$   in thousand$")
+  print("--------------------------------------")
+  for i in range(n):
+    print ("%5.0f %6.0f %15.0f" % (training_df[feature][10000 + i],
+                                   training_df[label][10000 + i],
+                                   predicted_values[i][0] )) 
 
 
 
@@ -128,5 +143,62 @@ weight, bias, epochs, rmse = train_model(my_model, training_df,
 print("\nThe learned weight for your model is %.4f" % weight)
 print("The learned bias for your model is %.4f\n" % bias )
 
+# plot_the_model(weight, bias, my_feature, my_label)
+# plot_the_loss_curve(epochs, rmse)
+
+
+# Task 2: Judge the predictive power of the model
+# Look at the preceding table. How close is the predicted value to the label value? In other words, does your model accurately predict house values?
+
+# predict_house_values(10, my_feature, my_label)
+
+# ANSWER: It's very swingy. It doesn't accurately predict house values at all compared to the actual number, and more rooms doesn't always mean more value.
+
+#Task 3: Try a different feature
+#The total_rooms feature had only a little predictive power. Would a different feature have greater predictive power? Try using population as the feature instead of total_rooms.
+# Trying population now:
+
+my_feature = "median_income"   # Replace the ? with population or possibly a different column name.
+# ANSWER: population is extremely off as well. if I were to use one feature, median_income seems to be more accurate.
+
+# Experiment with the hyperparameters.
+learning_rate = 2
+epochs = 3
+batch_size = 120
+
+# Don't change anything below this line.
+my_model = build_model(learning_rate)
+weight, bias, epochs, rmse = train_model(my_model, training_df, 
+                                         my_feature, my_label,
+                                         epochs, batch_size)
 plot_the_model(weight, bias, my_feature, my_label)
 plot_the_loss_curve(epochs, rmse)
+
+predict_house_values(15, my_feature, my_label)
+
+# Task 4: Define a synthetic feature
+# Define a synthetic feature named rooms_per_person
+training_df["rooms_per_person"] = training_df["total_rooms"] / training_df["population"] # write your code here.
+
+# Don't change the next line.
+my_feature = "rooms_per_person"
+
+# Assign values to these three hyperparameters.
+learning_rate = 0.06
+epochs = 24
+batch_size = 30
+
+# Don't change anything below this line.
+my_model = build_model(learning_rate)
+weight, bias, epochs, rmse = train_model(my_model, training_df,
+                                         my_feature, my_label,
+                                         epochs, batch_size)
+
+plot_the_loss_curve(epochs, rmse)
+predict_house_values(15, my_feature, my_label)
+
+
+# Task 5. Find feature(s) whose raw values correlate with the label
+print(training_df.corr())
+
+# ANSWER: Based on the chart, median_income is the most correlated with median_house_value.
