@@ -66,3 +66,20 @@ RULES OF THUMB FOR TUNING HYPERPARAMETERS:
 - Loss varying wildly? Decrease learning rate.
 - A good combo: lower learning rate, increase epochs or batch size.
 - Try large batch sizes, then tune it down.
+
+=> Linear Regression with a Real Dataset
+* Scaling features and labels is a good idea depending on size to keep things managable, keeping loss and learning in a better range. Example:
+training_df["median_house_value"] /= 1000.0
+
+The idea is to determine what features correlate best with the label, and this is done with the dataset and the hyperparameters. Based on this you can make predictions using certain features - some are better based on the data. RULE OF THUMB: make predictions of examples not used in training.
+
+You can also make synthetic features in pandas to use for your training and predictions. Example:
+training_df["rooms_per_person"] = training_df["total_rooms"] / training_df["population"]
+
+Another way to narrow down features to use is to use a correlation matrix: each attribute's raw values are compared to each other, and more corerelation = a higher number, from 1.0 to -1.0. Very positive correlations and very negative correlations are good predictive features.
+
+
+==GENERALIZATION==
+refers to your model's ability to adapt properly to new, previously unseen data, drawn from the same distribution as the one used to create the model.
+
+When a model DOESN'T do this (IE, low loss during training, but does a bad job predicting new data) it's called an overfitted model. A rule of thumb is this: the less complex a machine learning model, the more likely it'll make good empirical results.
