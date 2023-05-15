@@ -83,3 +83,13 @@ Another way to narrow down features to use is to use a correlation matrix: each 
 refers to your model's ability to adapt properly to new, previously unseen data, drawn from the same distribution as the one used to create the model.
 
 When a model DOESN'T do this (IE, low loss during training, but does a bad job predicting new data) it's called an overfitted model. A rule of thumb is this: the less complex a machine learning model, the more likely it'll make good empirical results.
+
+One way of working around this is to use a training set to train the model, and seperate test sets of a good size to test the model. You want to make sure examples that are drawn are independent and identical at random; that distribution doesn't change and it's all pulled from the same distribution.
+
+
+==TRAINING, TEST, VALIDATION SETS==
+Divide your data into three subsets: training, validation and test. Make sure the test set is large and represents the data set as a whole (no different characteristics).
+
+Make sure not to train on test data, and make sure duplicates of test data don't bleed over into the training set, or it's going to be way too accurate and not help with generalization.
+
+The idea: train the model on the training set. Evaluate against the validation set. Tweak the model (check params). Once you have a model that does the best on the validation set, then you confirm against the test set. This greatly reduces overfitting chances. (However, make sure to refres the validation and test sets with new data every so often.)
