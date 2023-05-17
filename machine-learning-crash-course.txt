@@ -93,3 +93,8 @@ Divide your data into three subsets: training, validation and test. Make sure th
 Make sure not to train on test data, and make sure duplicates of test data don't bleed over into the training set, or it's going to be way too accurate and not help with generalization.
 
 The idea: train the model on the training set. Evaluate against the validation set. Tweak the model (check params). Once you have a model that does the best on the validation set, then you confirm against the test set. This greatly reduces overfitting chances. (However, make sure to refres the validation and test sets with new data every so often.)
+
+When analyzing the results, you can see why the loss curve differs by using pandas functions and making sure your data isn't sorted. Then, you can run against unused test data.
+
+
+==REPRESENTATION==

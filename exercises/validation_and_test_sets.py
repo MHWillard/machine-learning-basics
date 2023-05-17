@@ -84,3 +84,74 @@ train_df["median_house_value"] /= scale_factor
 
 # Scale the test set's label
 test_df["median_house_value"] /= scale_factor
+
+
+## EXERCISES ##
+
+### Task 1: Experiment with the validation split
+# If the data in the training set is similar to the data in the validation set, then the two loss curves and the final loss values should be almost identical. However, the loss curves and final loss values are not almost identical.
+# Experiment with two or three different values of validation_split. Do different values of validation_split fix the problem?
+# ANSWER: based on experimentation, validation needs to be bigger but not too big. 0.4-0.5 seems to work good and to keep the loss almost identical.
+
+# The following variables are the hyperparameters.
+learning_rate = 0.08
+epochs = 30
+batch_size = 100
+
+# Split the original training set into a reduced training set and a
+# validation set. 
+validation_split = 0.4
+
+# Identify the feature and the label.
+my_feature = "median_income"    # the median income on a specific city block.
+my_label = "median_house_value" # the median house value on a specific city block.
+# That is, you're going to create a model that predicts house value based 
+# solely on the neighborhood's median income.  
+
+# Invoke the functions to build and train the model.
+my_model = build_model(learning_rate)
+# Old code:
+#epochs, rmse, history = train_model(my_model, train_df, my_feature, 
+                                    # my_label, epochs, batch_size, 
+                                    # validation_split)
+shuffled_train_df = train_df.reindex(np.random.permutation(train_df.index))
+epochs, rmse, history = train_model(my_model, shuffled_train_df, my_feature, 
+                                      my_label, epochs, batch_size, 
+                                      validation_split)
+
+plot_the_loss_curve(epochs, history["root_mean_squared_error"], 
+                    history["val_root_mean_squared_error"])
+
+
+### Task 2: Determine why the loss curves differ
+# No matter how you split the training set and the validation set, the loss curves differ significantly. Evidently, the data in the training set isn't similar enough to the data in the validation set.
+# To solve this mystery of why the training set and validation set aren't almost identical, write a line or two of pandas code in the following code cell.
+print(train_df.head(1000))
+print(test_df.head(1000))
+
+# LESSON: Pre-sorted data for training could influence relationships in a bad way.
+
+
+### Task 3. Fix the problem
+# Change implementation, then answer the following:
+# With the training set shuffled, is the final loss for the training set closer to the final loss for the validation set?
+# At what range of values of validation_split do the final loss values for the training set and validation set diverge meaningfully? Why?
+
+# ANSWER: In the higher levels of validation split, loss starts to diverge more, probably because there isn't enough to train on.
+
+
+# Task 4: Use the Test Dataset to Evaluate Your Model's Performance
+# Compare the root mean squared error of the model when evaluated on each of the three datasets:
+    # training set: look for root_mean_squared_error in the final training epoch.
+    # validation set: look for val_root_mean_squared_error in the final training epoch.
+    # test set: run the preceding code cell and examine the root_mean_squared_error.
+# Ideally, the root mean squared error of all three sets should be similar. Are they?
+
+x_test = test_df[my_feature]
+y_test = test_df[my_label]
+
+results = my_model.evaluate(x_test, y_test, batch_size=batch_size)
+# root_mean_squared_error: 83.7294
+# epoch:  root_mean_squared_error: 83.7136 - val_loss: 7022.8047 - val_root_mean_squared_error: 83.8022
+
+# ANSWER: they are very close, yes. 
