@@ -98,3 +98,20 @@ When analyzing the results, you can see why the loss curve differs by using pand
 
 
 ==REPRESENTATION==
+Means when a developer adds and improves features to hone a model.
+
+Feature engineering is when raw data gets transformed into a set of floating-point values called a feature vector.
+Integers can get assigned to floats easily. Categorial values like strings get mapped to a number value. It's best to set a binary vector: for each relevant element, assign to 1, the rest get 0. (This is basically the weight of items.)
+ONE-HOT ENCODING: a single value is 1
+MULTI-HOT ENCODING: multiple values are 1
+
+However, if you'd have a lot of 0s, that eats storage and compute time, so sparse representation is when you store nonzero values.
+
+QUALITIES OF GOOD FEATURES:
+-used multiple times in a data set
+-has a clear and obvious meaning
+-no "magic" values or values that are out of range 
+-the definition of it shouldn't change over time (like a city name)
+
+CLEANING DATA:
+Cleaning up data is important before use to avoid messing up the whole data set and training a bad model.
