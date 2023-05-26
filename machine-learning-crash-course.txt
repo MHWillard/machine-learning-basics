@@ -114,4 +114,21 @@ QUALITIES OF GOOD FEATURES:
 -the definition of it shouldn't change over time (like a city name)
 
 CLEANING DATA:
-Cleaning up data is important before use to avoid messing up the whole data set and training a bad model.
+Cleaning up data is important before use to avoid messing up the whole data set and training a bad model. Here's some ways to do that.
+
+* Scaling: convert floating-points to more of a standard range. Best with multiple features. It helps the model learn appropriate weights, avoid NaNs (not a number), etc. Make sure the scaling makes sense with each other: feature A can't be =3 to +3 and B can't be 5000-1000000, for example.
+* Clipping: some data has outliers that are very extreme and create long tails on a chart. One method is to cap the maximum value of these features to create a more consistent curve.
+* Binning: You can put data into "bins" based on criteria so the model can learn based on each bin, assigning different weights based on the bin. For example, house prices different at various latitudes, so certain latitudes could be binned and have more weight than others. (Binning by quantile gets rid of outliers.)
+* Scrubbing: Delete the following from a data set; ommitted values, duplicate values, mislabelled/bad labels, bad feature values. Getting maximum/minimum, mean/median, and standard deviation statistics can also help.
+
+1. Keep in mind what you think your data should look like.
+2. Verify that the data meets these expectations (or that you can explain why it doesn’t).
+3. Double-check that the training data agrees with other sources (for example, dashboards).
+
+
+==FEATURE CROSSES==
+=> A feature cross is a synthetic feature that encodes nonlinearity in the feature space by multiplying two or more input features together. (or you can square them)
+- This is good when you can't divde a problem set in two with a single line, which makes this a nonlinear problem. You can then use this as a feature to drop into a linear formula.
+
+You can also cross one-hot feature vectors. Remember, this is when values get turned into binary vectors: Small [1,0], Medium [0,1], Large [1,1] for example. Then you can combine with a Cartesian product or multiplying the vectors by element. This is good for highly complex models. (Neural networks is another.)
+
