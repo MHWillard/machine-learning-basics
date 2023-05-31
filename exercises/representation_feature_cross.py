@@ -209,7 +209,7 @@ my_model.evaluate(x=test_features, y=test_label, batch_size=batch_size)
 # This was the answer which will help the model learn weights for each of the feature cross cells.
 
 
-resolution_in_degrees = 1.0
+resolution_in_degrees = 0.5
 
 # Create a list of numbers representing the bucket boundaries for latitude.
 latitude_boundaries = list(np.arange(int(min(train_df['latitude'])), 
@@ -267,9 +267,13 @@ my_model.evaluate(x=test_features, y=test_label, batch_size=batch_size)
 # Compare the model's root_mean_squared_error values for the two representations (buckets vs. feature cross)? Which model produced lower losses?
 # => It did perform even better. 
 
+
 # Task 5: Adjust the resolution of the feature cross
 # Experiment with resolution_in_degrees to answer the following questions:
 
 # - What value of resolution_in_degrees produces the best results (lowest loss value)?
 # - Why does loss increase when the value of resolution_in_degrees drops below a certain value?
 # - What feature (that does not exist in the California Housing Dataset) would be a better proxy for location than latitude X longitude.
+##
+# Around -.05 seems to be the best. Below that, the dataset then doesn't have enough examples to work with.
+# Seems like postal code would be a better indicator outside of latitude and longitude.
